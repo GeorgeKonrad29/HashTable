@@ -2,56 +2,65 @@
 #include <math.h>
 #include <functional>
 #include <list>
-using std::cout;
-
 template <typename T,typename U> class HashTable {
-Private:
-    class node
-    {
     private:
-        T* key;
-        U* data;
-    public:
-        node(): key=nullptr, data=nullptr;{}
-        node(T& newKey, U& newData)
-        {
-            key= newKey;
-            data= newData;
-        }
-        U& getData const()
-        {
-            return data;
-        }
-        T& getKey const()
-        {
-            return key;
-        }
+        class Node
+            {
+            private:
+                T* key;
+                U* data;
+            public:
+                Node(): key(nullptr), data(nullptr) {}
+                Node(T& newKey, U& newData)
+                {
+                    key= newKey;
+                    data= newData;
+                }
+                U& getData() const
+                {
+                    return data;
+                }
+                T& getKey() const
+                {
+                    return key;
+                }
 
-    };
-    int KeyNumber;
-    int dataArraySize;
-    list<vector> range[];
+            };
+    unsigned int const loadFactor=0.75;
+    unsigned int dataArraySize;
+    std::list<Node>* DataArray;
     
-    int hashFunction()
+    
+    
+    int hashFunction(const T& key)
     {
-        int hNumber =  keyNumber mod dataArraySize;
+        int hNumber;
+        //hay que implementar una hash function que regrese un 
+        //entero dependiendo siempre de la llave que se entregue
         return hNumber;
     }
 public:
-    HashTable() : keyNumber=0, dataArraySize=10, DataArray[10];{}
-    insert(const T& key, const U& data)
+    HashTable()
+    {
+        dataArraySize=2;
+        DataArray= new std::list<Node>[dataArraySize];
+    }
+    void insert(const T& key, const U& data)
     {
         int hashNumber;
-        keyNumber++;
-        hashNumber = hashFuntion();
-        //crear lista con datos
-        list<node> bucket;
-        //crear un nodo por medio del constructor
-        node* newInput= new node(key,data);
-        list.pushBack(node);
+        hashNumber = hashFunction(key);
 
-        vector<T> key;
+        //crear lista con datos
+        std::list<Node> bucket;
+        Node newInput(key,data);    
+        bucket.pushBack(newInput);
 
  
-     }
+    }
 };
+
+int main()
+{
+    HashTable<int, int> table;
+    return 0;
+}
